@@ -1,0 +1,47 @@
+<%= form_with(model: topic) do |form| %>
+  <% if topic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+        <% topic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block", :required => true %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :position, style: "display: block" %>
+    <%= form.number_field :position %>
+  </div>
+
+  <div>
+    <%= form.label :nav_pos, style: "display: block" %>
+    <%= form.number_field :nav_pos %>
+  </div>
+
+  <div>
+    <%= form.label :icon, style: "display: block" %>
+    <%= form.text_field :icon %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, ['public','private','archived', 'hidden'], selected: 'public'%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
