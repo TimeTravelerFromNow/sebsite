@@ -1,0 +1,23 @@
+<div id="<%= dom_id tutorial %>" class="card tutorial-small">
+
+  <div class="row tutorial-title">
+
+  <strong class="col">
+    <%= tutorial.title %>
+  </strong>
+  </div>
+
+  <p class="tutorial-description">
+    <%= tutorial.description.truncate(120) %>
+  </p>
+
+  <small class="col">
+    created: <%= tutorial.created_at %>
+
+  </small>
+  <% if tutorial.status != "public" %>
+      <p style="color: orange"><%= tutorial.status %></p>
+  <% end %>
+
+  <%= link_to "read", tutorial, class:'btn btn-secondary' %>
+</div>

@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SebsiteLive</title>
+    <title>sebastian's website </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %> container-md center-content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-      <%= link_to "sebastian's website", root_path, class:"navbar-brand" %>
+      <%= link_to "about", root_path, class:"navbar-brand" %>
+
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,15 +25,40 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if @topics %>
-        <% @topics.each do |topic| %>
+        <% @topics.order(:nav_pos => :asc).each do |topic| %>
+              <% if topic.status == "hidden" %>
+              <li class="nav-item">
+                <%= link_to topic.title, topic, class: 'nav-link active', style: 'color: gray;' %>
+              </li>
+              <% else %>
               <li class="nav-item">
                 <%= link_to topic.title, topic, class: 'nav-link active' %>
               </li>
+              <% end %>
         <% end %>
       <% end %>
+      <li class="nav-item">
+        <%= link_to "dashboard", dashboard_root_path, class: 'nav-link active btn btn-primary' %>
+      </li>
     </ul>
   </div>
 </nav>
     <%= yield %>
+
+    <div class="container">
+      <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"> <%= link_to "home", root_path, class:"nav-link px-2 text-muted" %></li>
+        <% if @topics %>
+        <% @topics.order(:nav_pos => :asc).each do |topic| %>
+              <li class="nav-item">
+                <%= link_to topic.title, topic, class: 'nav-link px-2 text-muted' %>
+              </li>
+        <% end %>
+        <% end %>
+      </ul>
+      <p class="text-center text-muted">© <%= Tutorial.all.order(created_at: :asc).first.created_at.year %>  sebastian detering </p>
+    </footer>
+    </div>
   </body>
 </html>

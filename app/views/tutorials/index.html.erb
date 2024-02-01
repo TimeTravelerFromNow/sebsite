@@ -1,0 +1,82 @@
+<p style="color: green"><%= notice %></p>
+
+<%= link_to "New tutorial", new_tutorial_path, class:'btn btn-primary' %>
+
+<div id="public-tutorials">
+<h4>public tutorials</h4>
+<br>
+<div class="container text-center" >
+  <div class="row" >
+
+<% @topics.each do |topic| %>
+<% if topic.tutorials.where(status: "public").each.count > 0 %>
+
+  <div id="<%= dom_id topic %>" class="col ">
+    <h5><%= topic.title %> </h5>
+  <% topic.tutorials.where(status: "public").each do |tutorial| %>
+    <%= render "tutorial_small", tutorial: tutorial %>
+  <% end %>
+  </div>
+
+  <% end %>
+<% end %>
+
+</div>
+</div>
+
+<div id="tutorials">
+  <% if Tutorial.all.where(topic: nil, status: "public").count > 0 %>
+    <h5> uncategorized tutorials: </h5>
+  <% else %>
+  <br>
+  <p>
+    <small> no tutorials match <strong> uncategorized </strong> and <strong> public </strong>  </small>
+  </p>
+  <% end %>
+  <% @tutorials.where(topic: nil).each do |tutorial| %>
+    <%= render "tutorial_small", tutorial: tutorial %>
+    <p>
+      <%= link_to "Show this tutorial", tutorial %>
+    </p>
+  <% end %>
+</div>
+
+</div>
+
+<div id="all-tutorials">
+<h4>all tutorials</h4>
+<br>
+
+<div class="container text-center" >
+  <div class="row" >
+
+<% @topics.each do |topic| %>
+  <div id="<%= dom_id topic %>" class="col ">
+    <% if topic.tutorials.where.not(status: "public").each.count > 0 %>
+    <h5><%= topic.title %> </h5>
+  <% topic.tutorials.where.not(status: "public").each do |tutorial| %>
+    <%= render "tutorial_small", tutorial: tutorial %>
+  <% end %>
+  <% end %>
+  </div>
+<% end %>
+</div>
+</div>
+
+<div id="tutorials">
+  <% if Tutorial.all.where(topic: nil).where.not(status: "public").count > 0 %>
+    <h5> uncategorized tutorials: </h5>
+  <% else %>
+  <br>
+  <p>
+    <small> no other uncategorized tutorials </small>
+  </p>
+  <% end %>
+  <% @tutorials.where(topic: nil).each do |tutorial| %>
+    <%= render "tutorial_small", tutorial: tutorial %>
+    <p>
+      <%= link_to "Show this tutorial", tutorial %>
+    </p>
+  <% end %>
+</div>
+</div>

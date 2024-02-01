@@ -9,3 +9,5 @@ pin "bootstrap" # @5.3.2
 pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+pin "highlight", to:"https://ga.jspm.io/npm:highlight.js@11.8.0/es/index.js"
+pin "fs" # @2.0.1

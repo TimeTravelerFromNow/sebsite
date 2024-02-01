@@ -1,0 +1,43 @@
+
+
+.tutorials.index {
+  .tutorial-small {
+    margin: 5px;
+    padding: 10px;
+  }
+}
+
+.tutorials.edit {
+  .tutorial-headers {
+    max-width: 30%;
+
+    border-right-style: solid;
+  }
+
+  .tutorial-topics {
+    max-width: 400px;
+  }
+}
+
+:root {
+  .tutorial-description {
+    color: gray;
+  }
+
+  .tutorial-title {
+    img {
+      object-fit: cover;
+      overflow-clip-margin: content-box;
+      overflow: clip;
+    }
+
+    margin-left: 4%;
+  }
+}
+
+
+.topics.show {
+  .archived-tutorials {
+    max-width: 10%;
+  }
+}

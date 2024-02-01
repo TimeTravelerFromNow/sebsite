@@ -1,0 +1,49 @@
+<div id="<%= dom_id tutorial %>">
+
+  <% if tutorial.featured? %>
+    <small> updated: <%= time_ago_in_words(tutorial.updated_at) %> ago </small>
+  <% end %>
+
+  <h4><%= tutorial.title %></h4>
+
+  <small class="tutorial-description">  <%= tutorial.description %> </small>
+
+</div>
+
+
+<div id="material">
+  <% tutorial.materials.order(position: :asc).each do |m| %>
+    <% if m.rich_text? %>
+      <%= m.content %>
+    <% elsif m.image? %>
+      <% if m.image.present? %>
+        <%= image_tag m.image, style:"max-width: 400px;" %>
+      <% else %>
+      <% end %>
+    <% elsif m.code_block? %>
+      <div data-controller="high" id="<%= dom_id m  %>">
+        <a data-high-target="lang" id="lang">
+        <%= m.lang %>
+        </a>
+        <pre class="hljs" >
+          <code data-high-target="codeBlock">
+            <% if m.code_content.body %>
+              <%= m.code_content.body.to_plain_text %>
+            <% end %>
+          </code>
+        </pre>
+      </div>
+    <% else %>
+     Other content.
+    <% end %>
+  <% end %>
+</div>
+<small> updated: <%= tutorial.updated_at %> </small>
+
+<% if tutorial.topic %>
+
+  <%= link_to "back", topic_path(tutorial.topic), class:"btn btn-dark" %>
+<% else %>
+
+  <%= link_to "home", root_path, class:"btn btn-dark" %>
+<% end %>

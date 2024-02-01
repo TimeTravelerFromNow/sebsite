@@ -1,27 +1,27 @@
-<div id="<%= dom_id topic %>">
-  <p>
-    <strong>Title:</strong>
-    <%= topic.title %>
-  </p>
+<div id="<%= dom_id topic %>" class="topic">
+
+  <div class="row topic-title">
+
+
+      <% if topic.icon != "none selected" && topic.icon != ""%>
+      <%= image_tag "#{topic.icon}", class:"col", style: "max-width: 10%;" %>
+      <% end %>
+
+      <h3 class="col" style="max-width:30%"> <%= topic.title %> </h3>
+  </div>
 
   <p>
-    <strong>Description:</strong>
-    <%= topic.description %>
+  <%= topic.description %>
   </p>
 
-  <p>
-    <strong>Position:</strong>
-    <%= topic.position %>
-  </p>
+  <% if topic.header_image.present? %>
 
-  <p>
-    <strong>Nav pos:</strong>
-    <%= topic.nav_pos %>
-  </p>
+    <%= link_to topic do %>
+      <%= image_tag topic.header_image, class:"card topic-card mb-3" %>
+    <% end %>
 
-  <p>
-    <strong>Icon:</strong>
-    <%= topic.icon %>
-  </p>
+  <% else %>
+    <%= link_to "view" ,topic, class:"btn btn-primary" %>
+  <% end %>
 
 </div>

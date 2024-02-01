@@ -1,0 +1,15 @@
+
+:root {
+  .tutorial-materials {
+    max-width: 600px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .code-editor {
+   .trix-button-group--text-tools { display:none; }
+   .trix-button-group--block-tools { display:none; }
+   .trix-button-group--file-tools { display:none; }
+
+  }
+}

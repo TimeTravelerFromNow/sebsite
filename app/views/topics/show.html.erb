@@ -1,10 +1,36 @@
-<p style="color: green"><%= notice %></p>
 
-<%= render @topic %>
+<div id="topic-header">
+  <%= render "topic_header", topic: @topic %>
+</div>
+
+<div id="tutorials">
+  <div class="row">
+    <div class="col">
+  <% @topic.tutorials.where(:status => "public").order(created_at: :desc).each do |tutorial| %>
+    <%= render "tutorials/tutorial_card", tutorial: tutorial%>
+  <% end %>
+    </div>
+
+
+  <% if @topic.tutorials.where(:status => "archived").count > 0 %>
+    <div class="archived-tutorials col">
+    <h5> archive </h5>
+    <ul>
+    <% @topic.tutorials.where(:status => "archived").order(created_at: :desc).each do |tutorial| %>
+    <li>
+      <small> <%= link_to tutorial.title.truncate(30), tutorial%> </small>
+      <small> (<%= tutorial.created_at.year %>) </small>
+
+    </li>
+    <% end %>
+    </ul>
+    </div>
+  <% end %>
+  </div>
+</div>
 
 <div>
   <%= link_to "Edit this topic", edit_topic_path(@topic) %> |
   <%= link_to "Back to topics", topics_path %>
 
-  <%= button_to "Destroy this topic", @topic, method: :delete %>
 </div>

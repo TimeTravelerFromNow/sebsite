@@ -1,0 +1,78 @@
+<%= form_with(model: topic) do |form| %>
+  <% if topic.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+        <% topic.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col">
+    <div id="positions" class="row">
+      <div>
+        <%= form.label :position, style: "display: block" %>
+        <%= form.number_field :position %>
+      </div>
+
+      <div>
+        <%= form.label :nav_pos, style: "display: block" %>
+        <%= form.number_field :nav_pos %>
+      </div>
+    </div>
+
+    <div class="card row">
+  <div>
+    <%= form.label :title, style: "display: block", :required => true %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+  <div>
+    <%= form.label :explanation, style: "display: block" %>
+    <%= form.rich_text_area :explanation %>
+  </div>
+
+  <div>
+    <%= form.label :icon, style: "display: block" %>
+
+    <% topic_icon = "none selected" %>
+    <% if @topic.persisted? %>
+      <% topic_icon = @topic.icon %>
+    <% end %>
+
+    <%= form.select :icon, ["none selected", 'RUBY_ICON.png','IOS_ICON.png'], selected: topic_icon %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, ['public','private','archived', 'hidden'], selected: 'public'%>
+  </div>
+    </div>
+
+    <div class="card container">
+      <% if @topic.persisted? %>
+        <% if @topic.header_image.present? %>
+        <div class="row">
+          <%= image_tag @topic.header_image, class:"preview-img col" %>
+          <%= image_tag @topic.header_image, class:"topic-img topic-card col" %>
+        </div>
+        <% end %>
+      <% end %>
+      <div class="form-group">
+        <%= form.label :header_image %>
+        <%= form.file_field :header_image %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

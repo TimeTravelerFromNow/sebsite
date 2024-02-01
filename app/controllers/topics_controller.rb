@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
 
   # GET /topics or /topics.json
   def index
-    @topics = Topic.all
+    #@topics = Topic.all
   end
 
   # GET /topics/1 or /topics/1.json
@@ -18,6 +18,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    @external_link = @topic.external_links.build()
   end
 
   # POST /topics or /topics.json
@@ -69,6 +70,6 @@ class TopicsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def topic_params
-      params.require(:topic).permit(:title, :description, :position, :nav_pos, :icon, :status)
+      params.require(:topic).permit(:title, :description, :explanation, :position, :nav_pos, :icon, :status, :header_image)
     end
 end

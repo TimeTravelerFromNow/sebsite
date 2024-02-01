@@ -14,4 +14,25 @@
  *= require_self
  */
 
-@import "bootstrap"
+// more code highlight styles: https://github.com/highlightjs/highlight.js/blob/main/src/styles/
+
+@import "bootstrap";
+@import "topics";
+@import "tutorials";
+@import "materials";
+@import "atom-one-dark";
+
+:root {
+  background-color: #ffd7d8;
+  .center-content {
+      max-width: 860px;
+      margin-bottom: 0px;
+    }
+
+  .external-links {
+    img {
+      max-width: 48px;
+      max-height: 48px;
+    }
+  }
+}

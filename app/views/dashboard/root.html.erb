@@ -1,0 +1,23 @@
+
+
+<div id="dashboard-buttons">
+
+  <%= link_to "tutorials", tutorials_path, class:"btn btn-primary" %>
+  <%= link_to "blog", blogs_path, class:"btn btn-primary" %>
+  <%= link_to "new topic", new_topic_path, class:"btn btn-primary"  %>
+
+</div>
+
+<div id="topics">
+  <% @topics.order(:position => :asc).each do |topic| %>
+
+    <div>
+    <div id="edit-topic-btn">
+    <%= link_to "edit this topic", edit_topic_path(topic), class:"btn btn-secondary" %>
+    </div>
+
+    <%= render topic %>
+    </div>
+
+  <% end %>
+</div>

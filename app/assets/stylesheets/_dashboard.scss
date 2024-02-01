@@ -1,0 +1,26 @@
+
+.dashboard.root {
+
+  #edit-topic-btn {
+    position: absolute;
+
+            right: calc(10% + 38px);
+            opacity: 0.4;
+            &:hover {
+              opacity: 1.0;
+            }
+
+  }
+
+  .topic {
+    border-style: solid;
+    border-width: 1px;
+
+  }
+
+  img {
+    object-fit: cover;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+  }
+}

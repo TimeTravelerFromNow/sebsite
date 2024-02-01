@@ -1,0 +1,18 @@
+
+<div id="topic-header ">
+
+  <% if topic.header_image.present? %>
+
+      <%= image_tag topic.header_image, class:"card topic-card mb-3" %>
+
+  <% else %>
+
+  <% end %>
+
+  <div class="container-sm" id="explanation">
+    <% if topic.explanation.present? %>
+      <%= topic.explanation %>
+    <% end %>
+  </div>
+
+</div>
