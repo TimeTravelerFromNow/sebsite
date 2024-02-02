@@ -9,8 +9,8 @@ class Topic < ApplicationRecord
   has_many :tutorials
 
   has_many :external_links
-
-  validates :title, exclusion: { in: ['tutorials', 'materials', 'blogs', 'abouts'] }
+  
+  validates :title, presence: true, exclusion: { in: ['tutorials', 'materials', 'blogs', 'abouts'] }
 
   def to_param
     title

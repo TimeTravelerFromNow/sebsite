@@ -26,13 +26,18 @@
     <ul class="navbar-nav mr-auto">
       <% if @topics %>
         <% @topics.order(:nav_pos => :asc).each do |topic| %>
+              <% select_style = "" %>
+              <% if topic == @topic %>
+                <% select_style = "text-bg-primary" %>
+              <% end %>
+
               <% if topic.status == "hidden" %>
-              <li class="nav-item">
-                <%= link_to topic.title, topic, class: 'nav-link active', style: 'color: gray;' %>
+              <li class="nav-item" >
+                <%= link_to topic.title, topic, class: 'nav-link active' , style: 'color: gray;' %>
               </li>
               <% else %>
               <li class="nav-item">
-                <%= link_to topic.title, topic, class: 'nav-link active' %>
+                <%= link_to topic.title, topic, class: "nav-link active badge #{select_style}" %>
               </li>
               <% end %>
         <% end %>
@@ -56,6 +61,9 @@
               </li>
         <% end %>
         <% end %>
+        <li class="nav-item"> <%= link_to "blog", blogs_path, class:"nav-link px-2 text-muted" %></li>
+        <li class="nav-item"> <%= link_to "tutorials", tutorials_path, class:"nav-link px-2 text-muted" %></li>
+
       </ul>
       <p class="text-center text-muted">© <%= Tutorial.all.order(created_at: :asc).first.created_at.year %>  sebastian detering </p>
     </footer>

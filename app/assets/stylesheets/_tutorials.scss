@@ -26,9 +26,10 @@
 
   .tutorial-title {
     img {
-      object-fit: cover;
+      object-fit: contain;
       overflow-clip-margin: content-box;
       overflow: clip;
+      max-width: 50px;
     }
 
     margin-left: 4%;
@@ -38,6 +39,6 @@
 
 .topics.show {
   .archived-tutorials {
-    max-width: 10%;
+    max-width: 20%;
   }
 }

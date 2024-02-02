@@ -12,7 +12,8 @@
   </p>
 
   <small class="col">
-    created: <%= tutorial.created_at %>
+    created: <%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>
+
 
   </small>
   <% if tutorial.status != "public" %>

@@ -6,7 +6,7 @@
       <%= image_tag topic.header_image, class:"card topic-card mb-3" %>
 
   <% else %>
-
+      <%= image_tag "TOPIC_PLACEHOLDER.png", class:"card topic-card mb-3" %>
   <% end %>
 
   <div class="container-sm" id="explanation">
@@ -14,5 +14,5 @@
       <%= topic.explanation %>
     <% end %>
   </div>
-
+<hr>
 </div>

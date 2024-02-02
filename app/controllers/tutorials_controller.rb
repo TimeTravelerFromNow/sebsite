@@ -34,7 +34,7 @@ class TutorialsController < ApplicationController
 
     respond_to do |format|
       if @tutorial.save
-        format.html { redirect_to tutorial_url(@tutorial), notice: "Tutorial was successfully created." }
+        format.html { redirect_to edit_tutorial_url(@tutorial), notice: "Tutorial was successfully created." }
         format.json { render :show, status: :created, location: @tutorial }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class TutorialsController < ApplicationController
   def update
     respond_to do |format|
       if @tutorial.update(tutorial_params)
-        format.html { redirect_to edit_tutorial_url(@tutorial), notice: "Tutorial was successfully updated." }
+        format.html { redirect_to request.referrer, notice: "Tutorial was successfully updated." }
         format.json { render :show, status: :ok, location: @tutorial }
       else
         format.html { render :edit, status: :unprocessable_entity }

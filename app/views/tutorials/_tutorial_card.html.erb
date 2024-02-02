@@ -1,19 +1,14 @@
-<div id="<%= dom_id tutorial %>" class="card">
+<div id="<%= dom_id tutorial %>" class=" mb-3">
 
   <div class="row tutorial-title">
 
   <% if tutorial.icon != "none selected" && tutorial.icon != ""%>
-    <%= image_tag "#{tutorial.icon}", class:"col", style: "max-width: 10%;" %>
+    <%= image_tag "#{tutorial.icon}", class:"col icon" %>
+  <% else %>
+    <%= image_tag "TUTORIAL_ICON.png", class:"col icon" %>
   <% end %>
 
-  <h3 class="col">
-    <%= tutorial.title %>
-  </h3>
+  <%= link_to tutorial.title, tutorial, class:"col px-2 text-muted" %>
+
   </div>
-
-  <p class="tutorial-description">
-    <%= tutorial.description.truncate(120) %>
-  </p>
-
-  <%= link_to "read", tutorial, class:'btn btn-secondary' %>
 </div>

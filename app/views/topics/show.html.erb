@@ -3,7 +3,7 @@
   <%= render "topic_header", topic: @topic %>
 </div>
 
-<div id="tutorials">
+<div id="tutorials" class="container-sm">
   <div class="row">
     <div class="col">
   <% @topic.tutorials.where(:status => "public").order(created_at: :desc).each do |tutorial| %>
@@ -18,8 +18,11 @@
     <ul>
     <% @topic.tutorials.where(:status => "archived").order(created_at: :desc).each do |tutorial| %>
     <li>
+      <small>
+        <%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>
+      </small>
       <small> <%= link_to tutorial.title.truncate(30), tutorial%> </small>
-      <small> (<%= tutorial.created_at.year %>) </small>
+
 
     </li>
     <% end %>

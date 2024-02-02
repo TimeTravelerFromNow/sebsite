@@ -1,0 +1,32 @@
+<div id="<%= dom_id tutorial %>" class="container tutorial-tiny">
+
+  <div class="row">
+
+      <small class="col">
+        (<%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>)
+      </small>
+  <strong class="col">
+    <%= link_to edit_tutorial_path(tutorial) do %>
+
+    <%= tutorial.title %>
+
+    <% end %>
+
+        <% if tutorial.status != "public" %>
+            <p class="col" style="color: orange"><%= tutorial.status %></p>
+        <% end %>
+  </strong>
+
+          <% if tutorial.status != "public" %>
+          <div class="col">
+
+          <%= form_with(model: tutorial) do |form| %>
+          <%= form.hidden_field :status, value: "public" %>
+          <%= form.submit "make public", class: "btn btn-secondary" %>
+          <% end %>
+        </div>
+
+          <% end %>
+
+  </div>
+</div>

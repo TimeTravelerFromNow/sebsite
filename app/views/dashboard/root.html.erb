@@ -2,9 +2,11 @@
 
 <div id="dashboard-buttons">
 
-  <%= link_to "tutorials", tutorials_path, class:"btn btn-primary" %>
-  <%= link_to "blog", blogs_path, class:"btn btn-primary" %>
   <%= link_to "new topic", new_topic_path, class:"btn btn-primary"  %>
+  <%= link_to "New tutorial", new_tutorial_path, class:'btn btn-primary' %>
+
+  <%= link_to "blog", dashboard_blogs_path, class:"btn btn-dark" %>
+  <%= link_to "tutorials", dashboard_tutorials_path, class:"btn btn-dark" %>
 
 </div>
 

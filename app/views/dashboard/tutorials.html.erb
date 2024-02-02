@@ -7,12 +7,14 @@
   <div class="row" >
 
 <% @topics.each do |topic| %>
-<% if topic.tutorials.where(status: "public").each.count > 0 %>
+  <% if topic.tutorials.where(status: "public").each.count > 0 %>
 
   <div id="<%= dom_id topic %>" class="col ">
     <h5><%= topic.title %> </h5>
   <% topic.tutorials.where(status: "public").each do |tutorial| %>
-    <%= render "tutorial_small", tutorial: tutorial %>
+    <%= render "tutorial_small", tutorial: tutorial, topic: topic %>
+    <%= link_to "open", tutorial, class:"btn btn-secondary"%>
+
   <% end %>
   </div>
 
@@ -32,9 +34,9 @@
   </p>
   <% end %>
   <% @tutorials.where(topic: nil, status: "public").each do |tutorial| %>
-    <%= render "tutorial_small", tutorial: tutorial %>
+    <%= render "tutorial_small", tutorial: tutorial , topic: nil%>
     <p>
-      <%= link_to "Show this tutorial", tutorial %>
+      <%= link_to "open", tutorial, class:"btn btn-secondary"%>
     </p>
   <% end %>
 </div>
@@ -49,39 +51,31 @@
   <div class="row" >
 
 <% @topics.each do |topic| %>
+  <div id="<%= dom_id topic %>" class="col ">
     <% if topic.tutorials.where.not(status: "public", status:"private").each.count > 0 %>
-    <h6> <%= topic.title %> </h6>
-    <div id="<%= dom_id topic %>" class="col ">
-
+    <h5><%= topic.title %> </h5>
   <% topic.tutorials.where.not(status: "public").each do |tutorial| %>
     <%= render "tutorial_tiny", tutorial: tutorial %>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
+</div>
+</div>
+
+  <% if Tutorial.all.where(topic: nil).where.not(status: "public").count > 0 %>
+  <div id="uncategorized-tutorials">
+    <% @tutorials.where(topic: nil).where.not(status:"public").each do |tutorial| %>
+      <%= render "tutorial_tiny", tutorial: tutorial %>
+      <p>
+      </p>
+    <% end %>
+    <hr>
+  <% else %>
+
+    <small> no other uncategorized tutorials </small>
+
   <% end %>
 
     </div>
-  <% end %>
-
-<% end %>
-</div>
-</div>
-
-<% if Tutorial.all.where(topic: nil).where.not(status: "public").count > 0 %>
-<div id="uncategorized-tutorials">
-
-  <small> uncategorized tutorials: </small>
-  <hr>
-  <% @tutorials.where(topic: nil).where.not(status:"public").each do |tutorial| %>
-    <%= render "tutorial_tiny", tutorial: tutorial %>
-    <p>
-      <%= link_to "Show this tutorial", tutorial %>
-    </p>
-
-    <% end %>
-<% else %>
-<br>
-<p>
-  <small> no other uncategorized tutorials </small>
-</p>
-<% end %>
-
-</div>
 </div>

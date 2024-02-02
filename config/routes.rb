@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'materials/update'
   get 'materials/destroy'
 
-  resources :blogs do
+  resources :blogs, param: :address do
     resources :materials
     resources :external_links
   end
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
   get 'dashboard/root'
+  get 'dashboard/blogs'
+  get 'dashboard/tutorials'
 
   root "topics#index"
 end

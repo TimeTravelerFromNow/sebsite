@@ -1,0 +1,21 @@
+<div id="<%= dom_id tutorial %>" class="container tutorial-tiny">
+
+  <div class="row">
+
+      <small class="col">
+        (<%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>)
+      </small>
+  <strong class="col">
+    <%= link_to tutorial do %>
+
+    <%= tutorial.title %>
+
+    <% end %>
+
+        <% if tutorial.status != "public" %>
+            <p class="col" style="color: orange"><%= tutorial.status %></p>
+        <% end %>
+  </strong>
+
+  </div>
+</div>

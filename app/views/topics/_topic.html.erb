@@ -21,6 +21,10 @@
     <% end %>
 
   <% else %>
+    <%= link_to topic do %>
+
+    <%= image_tag "TOPIC_PLACEHOLDER.png", class:"card topic-card mb-3" %>
+    <% end %>
     <%= link_to "view" ,topic, class:"btn btn-primary" %>
   <% end %>
 
