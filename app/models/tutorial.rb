@@ -3,6 +3,8 @@ class Tutorial < ApplicationRecord
 
   validates :title, presence: true
   validates :address, presence: true
+  validates_uniqueness_of :title
+  validates_uniqueness_of :address
 
   validates :description, presence: true, length: {minimum: 2}
 

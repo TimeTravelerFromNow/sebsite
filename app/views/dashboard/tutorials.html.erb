@@ -52,7 +52,7 @@
 
 <% @topics.each do |topic| %>
   <div id="<%= dom_id topic %>" class="col ">
-    <% if topic.tutorials.where.not(status: "public", status:"private").each.count > 0 %>
+    <% if topic.tutorials.where.not(status: "public").each.count > 0 %>
     <h5><%= topic.title %> </h5>
   <% topic.tutorials.where.not(status: "public").each do |tutorial| %>
     <%= render "tutorial_tiny", tutorial: tutorial %>
@@ -64,18 +64,14 @@
 </div>
 
   <% if Tutorial.all.where(topic: nil).where.not(status: "public").count > 0 %>
+  <small> uncategorized </small>
+  <hr>
   <div id="uncategorized-tutorials">
     <% @tutorials.where(topic: nil).where.not(status:"public").each do |tutorial| %>
       <%= render "tutorial_tiny", tutorial: tutorial %>
-      <p>
-      </p>
+
     <% end %>
-    <hr>
-  <% else %>
-
-    <small> no other uncategorized tutorials </small>
-
+  </div>
   <% end %>
 
-    </div>
 </div>

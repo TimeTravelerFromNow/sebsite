@@ -23,7 +23,8 @@
 @import "atom-one-dark";
 
 :root {
-  background-color: #ffd7d8;
+  background-color: #f4e7d8;
+
   .center-content {
       max-width: 860px;
       margin-bottom: 0px;
@@ -34,5 +35,15 @@
       max-width: 48px;
       max-height: 48px;
     }
+  }
+  .publicize {
+    position: relative;
+            right: calc(-50% + 38px);
+            opacity: 0.4;
+            &:hover {
+              opacity: 1.0;
+            }
+
+    max-width: 100px;
   }
 }

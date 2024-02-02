@@ -39,7 +39,11 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully updated." }
+        if address_changed
+          format.html { redirect_to edit_blog_path(@blog), notice: "Tutorial was successfully updated, address changed." }
+        else
+          format.html { redirect_to request.referrer, notice: "Tutorial was successfully updated." }
+        end
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,6 +63,11 @@ class BlogsController < ApplicationController
   end
 
   private
+
+    def address_changed
+      @blog.address != params[:address]
+    end
+
     def set_non_private_topics
       @topics = Topic.all.where.not(status: "archived", status:"private")
     end

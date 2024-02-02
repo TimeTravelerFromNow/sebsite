@@ -5,6 +5,9 @@ class Blog < ApplicationRecord
 
   validates :title, presence: true
 
+  validates_uniqueness_of :title
+  validates_uniqueness_of :address
+
   has_many :materials, dependent: :destroy
 
   def to_param

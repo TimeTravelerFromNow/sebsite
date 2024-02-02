@@ -47,7 +47,11 @@ class TutorialsController < ApplicationController
   def update
     respond_to do |format|
       if @tutorial.update(tutorial_params)
-        format.html { redirect_to request.referrer, notice: "Tutorial was successfully updated." }
+        if address_changed
+          format.html { redirect_to edit_tutorial_path(@tutorial), notice: "Tutorial was successfully updated, address changed." }
+        else
+          format.html { redirect_to request.referrer, notice: "Tutorial was successfully updated." }
+        end
         format.json { render :show, status: :ok, location: @tutorial }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,6 +71,10 @@ class TutorialsController < ApplicationController
   end
 
   private
+    def address_changed
+      @tutorial.address != params[:address]
+    end
+
     def set_public_topics
       @topics = Topic.all.where(:status => "public")
     end

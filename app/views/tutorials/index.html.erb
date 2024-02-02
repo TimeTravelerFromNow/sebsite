@@ -33,9 +33,7 @@
   <% end %>
   <% @tutorials.where(topic: nil, status: "public").each do |tutorial| %>
     <%= render "tutorial_small", tutorial: tutorial %>
-    <p>
-      <%= link_to "Show this tutorial", tutorial %>
-    </p>
+  
   <% end %>
 </div>
 
@@ -71,9 +69,6 @@
   <hr>
   <% @tutorials.where(topic: nil).where.not(status:"public").each do |tutorial| %>
     <%= render "tutorial_tiny", tutorial: tutorial %>
-    <p>
-      <%= link_to "Show this tutorial", tutorial %>
-    </p>
 
     <% end %>
 <% else %>
