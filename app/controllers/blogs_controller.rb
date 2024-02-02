@@ -1,83 +1,8 @@
-class BlogsController < ApplicationController
-  before_action :set_non_private_topics
-  before_action :set_blog, only: %i[ show edit update destroy ]
+class BlogsController < TutorialsController
 
-  # GET /blogs or /blogs.json
+   # Get /blogs
   def index
-    @blogs = Blog.all
+    @tutorials = Tutorial.all.where(is_blog: true)
   end
 
-  # GET /blogs/1 or /blogs/1.json
-  def show
-  end
-
-  # GET /blogs/new
-  def new
-    @blog = Blog.new
-  end
-
-  # GET /blogs/1/edit
-  def edit
-  end
-
-  # POST /blogs or /blogs.json
-  def create
-    @blog = Blog.new(blog_params)
-
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
-        format.json { render :show, status: :created, location: @blog }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /blogs/1 or /blogs/1.json
-  def update
-    respond_to do |format|
-      if @blog.update(blog_params)
-        if address_changed
-          format.html { redirect_to edit_blog_path(@blog), notice: "Tutorial was successfully updated, address changed." }
-        else
-          format.html { redirect_to request.referrer, notice: "Tutorial was successfully updated." }
-        end
-        format.json { render :show, status: :ok, location: @blog }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /blogs/1 or /blogs/1.json
-  def destroy
-    @blog.destroy
-
-    respond_to do |format|
-      format.html { redirect_to blogs_url, notice: "Blog was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-
-    def address_changed
-      @blog.address != params[:address]
-    end
-
-    def set_non_private_topics
-      @topics = Topic.all.where.not(status: "archived", status:"private")
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog
-      @blog = Blog.find_by!(address: params[:address])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def blog_params
-      params.require(:blog).permit(:address, :title, :body, :orig_date, :status, :featured)
-    end
 end

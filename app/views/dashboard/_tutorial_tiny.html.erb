@@ -5,9 +5,7 @@
     <div class="col">
 
       <%= form_with(model: tutorial) do |form| %>
-      <% if tutorial.topic %>
-      <%= form.hidden_field :topic_id, value: tutorial.topic.id %>
-      <% end %>
+
       <%= form.hidden_field :status, value: "public" %>
       <%= form.submit "publicize", class: "publicize btn btn-success" %>
       <% end %>
@@ -30,6 +28,10 @@
   </strong>
 
 
-
+  <div class="col">
+    <%= button_to "delete", tutorial, style:"color:red;", method: :delete, data: { } %>
   </div>
+  </div>
+  <hr>
+
 </div>

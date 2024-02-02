@@ -24,3 +24,16 @@
     overflow: clip;
   }
 }
+
+:root {
+  .dashboard-btn {
+    max-width: 80px;
+    position: absolute;
+
+            right: calc(50% - 80px);
+            opacity: 0.0;
+            &:hover {
+              opacity: 0.5;
+            }
+  }
+}

@@ -40,7 +40,11 @@ class TopicsController < ApplicationController
   def update
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to topic_url(@topic), notice: "Topic was successfully updated." }
+        if address_changed
+          format.html { redirect_to dashboard_root_path, notice: "Topic was successfully updated. Title changed!" }
+        else
+          format.html { redirect_to request.referrer, notice: "Topic was successfully updated." }
+        end
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,6 +64,10 @@ class TopicsController < ApplicationController
   end
 
   private
+    def address_changed
+      @topic.title != params[:title]
+    end
+
     def set_public_topics
       @topics = Topic.all.where(:status => "public")
     end

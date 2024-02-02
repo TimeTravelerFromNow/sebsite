@@ -1,11 +1,12 @@
-<div id="<%= dom_id tutorial %>" class="card tutorial-small">
+<div  id="<%= dom_id tutorial %>" class="container card">
+<div class="row tutorial-small">
 
+  <div class="col">
   <div class="row tutorial-title">
 
   <strong class="col">
     <%= tutorial.title %>
   </strong>
-  </div>
 
   <p class="tutorial-description">
     <%= tutorial.description.truncate(120) %>
@@ -19,7 +20,9 @@
       <p style="color: orange"><%= tutorial.status %></p>
   <% end %>
 
-  <div class="col">
+  </div>
+
+  <div id="tutorial-actions">
     <div class="row">
         <div class="col">
         <%= link_to "show", tutorial, class:"btn btn-secondary"%>
@@ -31,11 +34,9 @@
 
         <div class="col">
           <%= form_with(model: tutorial) do |form| %>
-          <% if tutorial.topic %>
-          <%= form.hidden_field :topic_id, value: tutorial.topic.id %>
-          <% end %>
+          
           <%= form.hidden_field :status, value: "archived" %>
-          <%= form.submit "archive", class: "btn btn-dark" %>
+          <%= form.submit "archive", class: "btn btn-warning" %>
           <% end %>
         </div>
 
@@ -49,29 +50,43 @@
           <% end %>
         </div>
 
-        <% @topics.each do |topic| %>
-        <div class="col">
-          <% if topic != tutorial.topic %>
-          <%= form_with(model: tutorial) do |form| %>
-          <%= form.hidden_field :topic_id, value: topic.id %>
-          <%= form.submit "add to #{ topic.title }", class: "btn btn-dark" %>
-          <% end %>
-          <% end %>
-        </div>
-        <% end %>
 
-        <% if tutorial.topic != nil %>
+      </div>
 
-                <div class="col">
-        <%= form_with(model: tutorial) do |form| %>
-          <div class="form-group">
-          <%= form.hidden_field :topic_id, value: nil %>
-          <%= form.submit "remove from #{tutorial.topic.title}", class: "btn btn-dark" %>
-          </div>
-        <% end %>
-
-        </div>
-        <% end %>
+      <div class="col">
+      <%= button_to "delete", tutorial, class:"btn btn-danger", method: :delete, data: { :turbo_confirm => "are you sure?" } %>
+      </div>
       </div>
   </div>
+
+  <div id="topic-sort-actions" class="col container-sm" style="max-width:30%;">
+    <small> select topic </small>
+
+    <% @topics.each do |topic| %>
+    <div class="col">
+      <% if topic != tutorial.topic %>
+      <%= form_with(model: tutorial) do |form| %>
+      <%= form.hidden_field :topic_id, value: topic.id %>
+      <%= form.submit topic.title, class: "btn btn-dark" %>
+      <% end %>
+      <% end %>
+    </div>
+    <% end %>
+
+    <% if tutorial.topic != nil %>
+
+            <div class="col">
+              <small> remove </small>
+    <%= form_with(model: tutorial) do |form| %>
+
+      <div class="form-group">
+      <%= form.hidden_field :topic_id, value: nil %>
+      <%= form.submit tutorial.topic.title, class: "btn btn-warning" %>
+      </div>
+    <% end %>
+
+    </div>
+    <% end %>
+  </div>
+</div>
 </div>

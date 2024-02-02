@@ -40,10 +40,11 @@
 </div>
 <small> updated: <%= tutorial.updated_at %> </small>
 
+<div id="back-buttons">
 <% if tutorial.topic %>
-
-  <%= link_to "back", topic_path(tutorial.topic), class:"btn btn-dark" %>
-<% else %>
-
-  <%= link_to "home", root_path, class:"btn btn-dark" %>
+  <%= link_to "back to #{tutorial.topic.title}", topic_path(tutorial.topic), class:"btn btn-primary" %>
 <% end %>
+
+<%= link_to "more tutorials", tutorials_path, class:"btn btn-primary" %>
+
+</div>

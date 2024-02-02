@@ -4,12 +4,16 @@ class DashboardController < ApplicationController
 
   end
 
+  def all
+    @tutorials = Tutorial.all
+  end
+
   def blogs
-    @blogs = Blog.all
+    @tutorials = Tutorial.all.where(is_blog: true)
   end
 
   def tutorials
-    @tutorials = Tutorial.all
+    @tutorials = Tutorial.all.where(is_blog: false)
   end
 
   private

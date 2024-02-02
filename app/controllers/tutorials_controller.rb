@@ -7,7 +7,7 @@ class TutorialsController < ApplicationController
 
   # GET /tutorials or /tutorials.json
   def index
-    @tutorials = Tutorial.all
+    @tutorials = Tutorial.all.where(is_blog: false)
   end
 
   # GET /tutorials/1 or /tutorials/1.json
@@ -65,7 +65,7 @@ class TutorialsController < ApplicationController
     @tutorial.destroy
 
     respond_to do |format|
-      format.html { redirect_to tutorials_url, notice: "Tutorial was successfully destroyed." }
+      format.html { redirect_to dashboard_tutorials_path, notice: "Tutorial was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -80,14 +80,18 @@ class TutorialsController < ApplicationController
     end
 
     def set_topic
+      # if( params[:topic_id] )
+      #   @tutorial.topic = Topic.find(params[:topic_id])
+      #   @tutorial.update(params)
+      # else
+      #   if @tutorial.topic
+      #     @tutorial.topic = nil
+      #     @tutorial.save
+      #   end
+      # end
       if( params[:topic_id] )
         @tutorial.topic = Topic.find(params[:topic_id])
         @tutorial.update(params)
-      else
-        if @tutorial.topic
-          @tutorial.topic = nil
-          @tutorial.save
-        end
       end
     end
     # Use callbacks to share common setup or constraints between actions.
@@ -97,6 +101,6 @@ class TutorialsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tutorial_params
-      params.require(:tutorial).permit(:address, :title, :topic_id, :description, :featured, :icon, :status)
+      params.require(:tutorial).permit(:address, :title, :is_blog, :topic_id, :description, :featured, :icon, :status)
     end
 end

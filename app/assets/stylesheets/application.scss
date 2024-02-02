@@ -16,11 +16,15 @@
 
 // more code highlight styles: https://github.com/highlightjs/highlight.js/blob/main/src/styles/
 
+
+$primary:  #a43738;
+
 @import "bootstrap";
 @import "topics";
 @import "tutorials";
 @import "materials";
 @import "atom-one-dark";
+
 
 :root {
   background-color: #f4e7d8;
@@ -45,5 +49,9 @@
             }
 
     max-width: 100px;
+  }
+
+  .select-card {
+    border-radius: 10px;
   }
 }

@@ -1,0 +1,12 @@
+
+<%= controller_name %>
+<%= action_name %>
+
+<div id="dashboard-buttons">
+
+  <%= link_to "dashboard", dashboard_root_path, class:"btn btn-secondary" %>
+  <%= link_to "all", dashboard_all_path, class:"btn btn-secondary" %>
+  <%= link_to "tutorials", dashboard_tutorials_path, class:"btn btn-secondary" %>
+
+</div>
+<%= render "blogs_tutorials" %>

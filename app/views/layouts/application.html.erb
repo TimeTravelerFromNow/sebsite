@@ -14,8 +14,12 @@
   <body class="<%= controller_name %> <%= action_name %> container-md center-content">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-      <%= link_to "about", root_path, class:"navbar-brand" %>
+      <% select_style = "" %>
+      <% selected = "card select-card bg-primary text-white" %>
+      <% if current_page?(root_path)  %>
+      <% select_style = selected %>
+      <% end %>
+      <%= link_to "about", root_path, class:"navbar-brand #{select_style}" %>
 
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,26 +29,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if @topics %>
-        <% @topics.order(:nav_pos => :asc).each do |topic| %>
+        <% @topics.order(:nav_pos => :asc).where(status:"public").each do |topic| %>
               <% select_style = "" %>
               <% if topic == @topic %>
-                <% select_style = "text-bg-primary" %>
+                <% select_style = selected %>
               <% end %>
 
-              <% if topic.status == "hidden" %>
-              <li class="nav-item" >
-                <%= link_to topic.title, topic, class: 'nav-link active' , style: 'color: gray;' %>
-              </li>
-              <% else %>
               <li class="nav-item">
-                <%= link_to topic.title, topic, class: "nav-link active badge #{select_style}" %>
+                <%= link_to topic.title, topic, class: "nav-link active #{select_style}" %>
               </li>
-              <% end %>
         <% end %>
       <% end %>
-      <li class="nav-item">
-        <%= link_to "dashboard", dashboard_root_path, class: 'nav-link active btn btn-primary' %>
-      </li>
     </ul>
   </div>
 </nav>
@@ -52,19 +47,30 @@
 
     <div class="container">
       <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <ul class="nav justify-content-center ">
         <li class="nav-item"> <%= link_to "home", root_path, class:"nav-link px-2 text-muted" %></li>
         <% if @topics %>
-        <% @topics.order(:nav_pos => :asc).each do |topic| %>
+        <% @topics.order(:nav_pos => :asc).where(status:"public").each do |topic| %>
               <li class="nav-item">
                 <%= link_to topic.title, topic, class: 'nav-link px-2 text-muted' %>
               </li>
         <% end %>
         <% end %>
-        <li class="nav-item"> <%= link_to "blog", blogs_path, class:"nav-link px-2 text-muted" %></li>
         <li class="nav-item"> <%= link_to "tutorials", tutorials_path, class:"nav-link px-2 text-muted" %></li>
 
       </ul>
+
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <% if @topics %>
+        <% @topics.order(:nav_pos => :asc).where(status:"hidden").each do |topic| %>
+              <li class="nav-item">
+                <%= link_to topic.title, topic, class: 'nav-link px-2 text-muted' %>
+              </li>
+        <% end %>
+        <% end %>
+      </ul>
+      <%= link_to "dashboard", dashboard_root_path, class: 'dashboard-btn nav-link active btn btn-primary' %>
+
       <p class="text-center text-muted">© <%= Tutorial.all.order(created_at: :asc).first.created_at.year %>  sebastian detering </p>
     </footer>
     </div>

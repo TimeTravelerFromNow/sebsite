@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   get 'materials/update'
   get 'materials/destroy'
 
-  resources :blogs, param: :address do
+
+  resources :tutorials, param: :address do
     resources :materials
     resources :external_links
   end
 
-
-  resources :tutorials, param: :address do
+  resources :tutorials, :path => 'blogs/', param: :address do
     resources :materials
     resources :external_links
   end
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'dashboard/root'
   get 'dashboard/blogs'
   get 'dashboard/tutorials'
+  get 'dashboard/all'
+
 
   root "topics#index"
 end

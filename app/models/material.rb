@@ -1,9 +1,8 @@
 class Material < ApplicationRecord
   belongs_to :tutorial, :optional => true
-  belongs_to :blog, :optional => true
 
   has_rich_text :content
-  
+
   has_rich_text :code_content
 
   has_one_attached :image
