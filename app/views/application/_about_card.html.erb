@@ -1,0 +1,15 @@
+<div id="<%= dom_id about %>" class="card about-card container-sm">
+
+  <div id="portrait" class="row justify-content-center">
+
+    <% if about.portrait.present? %>
+      <%= image_tag about.portrait, class:"col-3" %>
+    <% else %>
+      <%= image_tag asset_path(Links::ERROR), class:"col-3"%>
+    <% end %>
+  <div class="col-7 about-body" style="margin-left: 10px;">
+
+    <%= about.body %>
+  </div>
+</div>
+</div>

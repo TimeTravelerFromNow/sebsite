@@ -7,6 +7,8 @@
   <h4><%= tutorial.title %></h4>
 
   <small class="tutorial-description">  <%= tutorial.description %> </small>
+  
+  <%= render "ext_link_row", links: tutorial.external_links %>
 
 </div>
 
@@ -39,6 +41,8 @@
   <% end %>
 </div>
 <small> updated: <%= tutorial.updated_at %> </small>
+
+<%= render "about", topic: tutorial.topic %>
 
 <div id="back-buttons">
 <% if tutorial.topic %>

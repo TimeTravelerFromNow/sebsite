@@ -1,0 +1,5 @@
+<div id="tutorials" class="container-sm">
+  <% @topic.tutorials.where(:status => "public", :is_blog => false).order(created_at: :desc).each do |tutorial| %>
+    <%= render "tutorials/tutorial_card", tutorial: tutorial%>
+  <% end %>
+</div>

@@ -1,4 +1,6 @@
 class MaterialsController < ApplicationController
+  include Auth
+  http_basic_authenticate_with name: Auth::USERNAME, password: Auth::PW, only: %i[ new create edit update destroy]
 
   before_action :set_parent
   before_action :set_material, except: %i[create]
@@ -30,9 +32,6 @@ class MaterialsController < ApplicationController
         end
       end # do format
     end
-
-    if @blog
-    end
   end
 
   def destroy
@@ -52,23 +51,15 @@ class MaterialsController < ApplicationController
       if params[:tutorial_address]
         @tutorial = Tutorial.find_by!(address: params[:tutorial_address])
       end
-
-      if params[:blog_id]
-        @blog = Blog.find(params[:blog_id])
-      end
     end
 
     def set_material
       if @tutorial
         @material = @tutorial.materials.find(params[:id])
       end
-
-      if @blog
-        @material = @blog.materials.find(params[:id])
-      end
     end
     # Only allow a list of trusted parameters through.
     def material_params
-      params.require(:material).permit(:content_type, :content, :code_content, :lang, :image, :width, :tutorial_address, :blog_id)
+      params.require(:material).permit(:content_type, :content, :code_content, :lang, :image, :width, :tutorial_address)
     end
 end

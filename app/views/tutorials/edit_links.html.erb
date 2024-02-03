@@ -1,0 +1,7 @@
+<h1><% if @tutorial.is_blog %> blog <% end %>
+<% if !(@tutorial.is_blog) %> tutorial <% end %></h1>
+
+editing <small> <%= @tutorial.title %></small> links 
+<p style="color: green"><%= notice %></p>
+
+<%= render "maintain_links" %>

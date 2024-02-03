@@ -1,0 +1,47 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Abouts</h1>
+
+<div id="abouts">
+  <% @abouts.each do |about| %>
+    <%= render "about_card", about: about %>
+    <p>
+      <%= link_to "Show this about", about %>
+    </p>
+
+
+
+      <div id="topic-sort-actions" class="col container-sm" style="max-width:30%;">
+        <small> select topic </small>
+
+        <% @topics.each do |topic| %>
+        <div class="col">
+          <% if topic != about.topic %>
+          <%= form_with(model: about) do |form| %>
+          <%= form.hidden_field :topic_id, value: topic.id %>
+          <%= form.submit topic.title, class: "btn btn-dark" %>
+          <% end %>
+          <% end %>
+        </div>
+        <% end %>
+
+        <% if about.topic != nil %>
+
+                <div class="col">
+                  <small> remove </small>
+        <%= form_with(model:  about) do |form| %>
+
+          <div class="form-group">
+          <%= form.hidden_field :topic_id, value: nil %>
+          <%= form.submit about.topic.title, class: "btn btn-warning" %>
+          </div>
+        <% end %>
+
+        </div>
+        <% end %>
+      </div>
+
+  <% end %>
+</div>
+
+<%= link_to "New about", new_about_path %>

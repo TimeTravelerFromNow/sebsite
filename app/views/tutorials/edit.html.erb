@@ -1,8 +1,5 @@
-
-
 <h1><% if @tutorial.is_blog %> blog <% end %>
 <% if !(@tutorial.is_blog) %> tutorial <% end %></h1>
-
 <p style="color: green"><%= notice %></p>
 
 <%= render "form", tutorial: @tutorial %>
@@ -11,6 +8,13 @@
 <div>
   <%= link_to "Show this tutorial", @tutorial %> |
   <%= link_to "all tutorials/blogs",  dashboard_all_path, class: "btn btn-secondary" %>
+
+</div>
+
+<div id="ext-link-row-edit" class="container">
+  <%= link_to "edit links", edit_links_path(@tutorial), class:"btn btn-primary" %>
+
+    <%= render "ext_link_row", links: @tutorial.external_links %>
 
 </div>
 

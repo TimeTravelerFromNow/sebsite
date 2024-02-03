@@ -20,5 +20,13 @@
       <p style="color: orange"><%= tutorial.status %></p>
   <% end %>
 
-  <%= link_to "read", tutorial, class:'btn btn-secondary' %>
+  <div class="read-btn col">
+  <% if tutorial.is_blog %>
+    <%= link_to "read", blog_path( tutorial ), class:'btn btn-secondary'%>
+  <% else %>
+    <%= link_to "read", tutorial, class:'btn btn-secondary' %>
+  <% end %>
+  </div>
+
+
 </div>

@@ -1,13 +1,17 @@
 class TutorialsController < ApplicationController
+  include Auth
+  http_basic_authenticate_with name: Auth::USERNAME, password: Auth::PW, only: %i[ new create edit update destroy]
 
   before_action :set_public_topics
-  before_action :set_tutorial, only: %i[ show edit update destroy ]
+  before_action :set_tutorial, only: %i[ show edit update destroy edit_links ]
 
   before_action :set_topic, only: %i[ update ]
 
   # GET /tutorials or /tutorials.json
   def index
-    @tutorials = Tutorial.all.where(is_blog: false)
+    @tutorials = Tutorial.all.where.not(is_blog: true) # will have nil
+    @topics = Topic.all
+
   end
 
   # GET /tutorials/1 or /tutorials/1.json
@@ -20,6 +24,9 @@ class TutorialsController < ApplicationController
     @topics = Topic.all
   end
 
+  def edit_links
+    @external_link = @tutorial.external_links.new
+  end
   # GET /tutorials/1/edit
   def edit
     @topics = Topic.all
@@ -78,17 +85,11 @@ class TutorialsController < ApplicationController
     def set_public_topics
       @topics = Topic.all.where(:status => "public")
     end
+    def set_more_topics
+      @topics = Topic.all.where.not(status:"hidden", status:"archived")
+    end
 
     def set_topic
-      # if( params[:topic_id] )
-      #   @tutorial.topic = Topic.find(params[:topic_id])
-      #   @tutorial.update(params)
-      # else
-      #   if @tutorial.topic
-      #     @tutorial.topic = nil
-      #     @tutorial.save
-      #   end
-      # end
       if( params[:topic_id] )
         @tutorial.topic = Topic.find(params[:topic_id])
         @tutorial.update(params)

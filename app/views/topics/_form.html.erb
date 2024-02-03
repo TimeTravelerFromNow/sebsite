@@ -13,6 +13,7 @@
 
   <div class="col">
     <div id="positions" class="row">
+      <div class="col">
       <div>
         <%= form.label :position, style: "display: block" %>
         <%= form.number_field :position %>
@@ -22,6 +23,11 @@
         <%= form.label :nav_pos, style: "display: block" %>
         <%= form.number_field :nav_pos %>
       </div>
+
+      </div>
+
+      <%= render "maintain_links" %>
+
     </div>
 
     <div class="card row">
@@ -52,7 +58,11 @@
 
   <div class="form-group">
     <%= form.label :status %>
-    <%= form.select :status, ['public','private','archived', 'hidden'], selected: 'public'%>
+    <% selected_status = 'pending' %>
+    <% if @topic.persisted? %>
+      <% selected_status = @topic.status %>
+    <% end %>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: selected_status%>
   </div>
     </div>
 
@@ -76,20 +86,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-<div class="external-links container-sm">
-  <% if @topic.external_links.find_by(icon: "GITHUB_ICON.png") %>
-    found
-  <% else %>
-  <%= form_with(model: [@topic, @external_link] ) do |form| %>
-    <%= form.label :address%>
-    <%= form.text_field :address%>
-
-    <%= image_tag asset_path("GITHUB_ICON.png") %>
-
-    <%= form.hidden_field :icon, value: "GITHUB_ICON.png" %>
-    <%= form.submit "add", class:'btn btn-dark' %>
-  <% end %>
-  <% end %>
-
-</div>

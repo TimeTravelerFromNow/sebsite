@@ -1,0 +1,31 @@
+<div id="blogs" class="container-sm">
+  <div class="row">
+    <div class="col">
+      <% @topic.tutorials.where(:status => "public", :is_blog => true, :featured => true).order(created_at: :desc).each do |tutorial| %>
+        <%= render "blog_card", tutorial: tutorial%>
+      <% end %>
+  <% @topic.tutorials.where(:status => "public", :is_blog => true, :featured => false).order(created_at: :desc).each do |tutorial| %>
+    <%= render "blog_card", tutorial: tutorial%>
+  <% end %>
+    </div>
+
+
+  <% if @topic.tutorials.where(:status => "archived", :is_blog => true).count > 0 %>
+    <div class="archived-tutorials col">
+    <h5> archive </h5>
+    <ul>
+    <% @topic.tutorials.where(:status => "archived").order(created_at: :desc).each do |tutorial| %>
+    <li>
+      <small>
+      <%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>
+       <%= link_to tutorial.title.truncate(30), blog_path(tutorial)%>
+     </small>
+
+
+    </li>
+    <% end %>
+    </ul>
+    </div>
+  <% end %>
+  </div>
+</div>

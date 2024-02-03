@@ -1,0 +1,23 @@
+
+:root {
+  .external-link-form {
+    max-width: 100px;
+  }
+
+  .address-field {
+    max-width: 40px;
+  }
+
+  .external-link {
+    img {
+      object-fit: contain;
+      overflow-clip-margin: content-box;
+      overflow: clip;
+      max-width: 56px;
+    }
+  }
+  .card.link-card {
+    max-width: 55px;
+    border-radius: 5px;
+  }
+}

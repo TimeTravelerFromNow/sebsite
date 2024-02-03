@@ -7,7 +7,7 @@
 
   }
   #explanation {
-    
+
   }
 
   .topic {
@@ -31,6 +31,9 @@
 }
 
 .topics.edit {
+  #maintain-links {
+    max-width: 50%;
+  }
   .topic-img {
     object-fit: cover;
     overflow-clip-margin: content-box;

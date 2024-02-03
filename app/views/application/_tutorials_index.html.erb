@@ -21,7 +21,7 @@
 
   <div id="<%= dom_id topic %>" class="col ">
     <h5><%= topic.title %> </h5>
-  <% topic.tutorials.where(status: "public").each do |tutorial| %>
+  <% topic.tutorials.where(status: "public", is_blog: showing_blogs).each do |tutorial| %>
     <%= render "tutorial_small", tutorial: tutorial %>
   <% end %>
   </div>
@@ -34,13 +34,8 @@
 
 <div id="tutorials">
   <% if Tutorial.all.where(topic: nil, status: "public", is_blog: showing_blogs).count > 0 %>
-    <h5> no topic: </h5>
+    <small> no topic: </small>
     <hr>
-  <% else %>
-  <br>
-  <p>
-    <small> no tutorials match <strong> uncategorized </strong> and <strong> public </strong>  </small>
-  </p>
   <% end %>
   <% @tutorials.where(topic: nil, status: "public", is_blog: showing_blogs).each do |tutorial| %>
     <%= render "tutorial_small", tutorial: tutorial %>
@@ -58,11 +53,11 @@
   <div class="row" >
 
 <% @topics.each do |topic| %>
-    <% if topic.tutorials.where.not(status: "public", status:"private", is_blog: showing_blogs).each.count > 0 %>
+    <% if topic.tutorials.where(is_blog: showing_blogs).where.not(status: ["public", "private"]).each.count > 0 %>
     <h6> <%= topic.title %> </h6>
     <div id="<%= dom_id topic %>" class="col ">
 
-  <% topic.tutorials.where.not(status: "public", is_blog: showing_blogs).each do |tutorial| %>
+  <% topic.tutorials.where(is_blog: showing_blogs).where.not(status: ["public", "private"]).each do |tutorial| %>
     <%= render "tutorial_tiny", tutorial: tutorial %>
   <% end %>
 
@@ -73,20 +68,15 @@
 </div>
 </div>
 
-<% if Tutorial.all.where(topic: nil).where.not(status: "public", is_blog: showing_blogs).count > 0 %>
+<% if Tutorial.all.where(topic: nil, is_blog: showing_blogs).where.not(status: ["public", "private"]).count > 0 %>
 <div id="uncategorized-tutorials">
 
   <small> uncategorized tutorials: </small>
   <hr>
-  <% @tutorials.where(topic: nil).where.not(status:"public", is_blog: showing_blogs).each do |tutorial| %>
+  <% @tutorials.where(topic: nil, is_blog: showing_blogs).where.not(status: ["public", "private"]).each do |tutorial| %>
     <%= render "tutorial_tiny", tutorial: tutorial %>
 
     <% end %>
-<% else %>
-<br>
-<p>
-  <small> no other uncategorized tutorials </small>
-</p>
 <% end %>
 
 </div>

@@ -3,31 +3,15 @@
   <%= render "topic_header", topic: @topic %>
 </div>
 
-<div id="tutorials" class="container-sm">
-  <div class="row">
-    <div class="col">
-  <% @topic.tutorials.where(:status => "public").order(created_at: :desc).each do |tutorial| %>
-    <%= render "tutorials/tutorial_card", tutorial: tutorial%>
-  <% end %>
-    </div>
 
+<div class="container-md">
 
-  <% if @topic.tutorials.where(:status => "archived").count > 0 %>
-    <div class="archived-tutorials col">
-    <h5> archive </h5>
-    <ul>
-    <% @topic.tutorials.where(:status => "archived").order(created_at: :desc).each do |tutorial| %>
-    <li>
-      <small>
-        <%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>
-      </small>
-      <small> <%= link_to tutorial.title.truncate(30), tutorial%> </small>
+    <%= render "blogs" %>
 
+    <%= render "tutorials" %>
 
-    </li>
-    <% end %>
-    </ul>
-    </div>
-  <% end %>
-  </div>
 </div>
+
+<%= render "about", topic: @topic %>
+
+<%= render "ext_link_row", links: @topic.external_links %>

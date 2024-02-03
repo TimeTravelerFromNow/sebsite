@@ -11,6 +11,7 @@ class Tutorial < ApplicationRecord
   include Visible
 
   has_many :materials, dependent: :destroy
+  has_many :external_links, dependent: :destroy
 
 
   def featured?

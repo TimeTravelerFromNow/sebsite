@@ -6,11 +6,16 @@
         (<%= tutorial.created_at.to_date.to_formatted_s :long_ordinal %>)
       </small>
   <strong class="col">
-    <%= link_to tutorial do %>
+    <% if tutorial.is_blog %>
+      <%= link_to tutorial.title, blog_path(tutorial) %>
+    <% else %>
+      <%= link_to tutorial do %>
 
-    <%= tutorial.title %>
+      <%= tutorial.title %>
 
+      <% end %>
     <% end %>
+
 
         <% if tutorial.status != "public" %>
             <p class="col" style="color: orange"><%= tutorial.status %></p>

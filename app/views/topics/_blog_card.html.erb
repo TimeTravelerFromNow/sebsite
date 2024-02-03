@@ -1,0 +1,17 @@
+<div id="<%= dom_id tutorial %>" class="blog-card mb-3">
+
+  <div class="row tutorial-title">
+
+  <% if tutorial.icon != "none selected" && tutorial.icon != ""%>
+    <%= image_tag "#{tutorial.icon}", class:"col icon" %>
+  <% else %>
+
+  <% end %>
+
+  <%= link_to tutorial.title, blog_path(tutorial), class:"col" %>
+
+  <% if tutorial.featured? %>
+    <%= render "ext_link_row", links: tutorial.external_links %>
+  <% end %>
+  </div>
+</div>

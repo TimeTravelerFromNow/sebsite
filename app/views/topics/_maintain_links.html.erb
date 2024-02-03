@@ -1,0 +1,87 @@
+
+<div id="maintain-links" class="external-links container-sm">
+
+  <div id="active-links" class="row">
+  <% @topic.external_links.each do |active_link| %>
+    <% if active_link.persisted? %>
+    <div id="<%= dom_id active_link%>" class="external-link-form container">
+
+      <%= render "link_icon", link: active_link %>
+
+    <%= form_with(model: [@topic, active_link] ) do |form| %>
+      <%= form.label :address %>
+      <%= form.text_field :address, value: active_link.address %>
+
+      <%= form.hidden_field :key, value: active_link.key %>
+
+      <%= form.submit "update", class:'btn btn-dark' %>
+      <%= link_to "remove", topic_external_link_path(@topic, active_link), data: { turbo_method: :delete } %>
+
+    <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div id="major-links" class="container">
+    <div class="row">
+  <% Links::MAJOR_PLATFORMS.each do |link| %>
+    <% if !(@topic.external_links.find_by(key: link)) %>
+        <div id="link_major_<%=link%>" class="container-sm external-link-form col">
+          <div class="row">
+            <% icon_path = Links.icon_path_for(link) %>
+            <%= image_tag asset_path(icon_path), class:"col link-icon" %>
+
+              <%= form_with(model: [@topic, @external_link] ) do |form| %>
+                <div class="form-group col address-field">
+                  <%= form.label :address%>
+                  <%= form.text_field :address%>
+                </div>
+                <%= form.hidden_field :key, value: link %>
+
+                <%= form.hidden_field :icon, value: icon_path %>
+                <%= form.submit "add", class:' col btn btn-dark' %>
+
+              <% end %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col md-3">
+  <small> add more links</small>
+  <%= form_with(model: [@topic, @external_link] ) do |form| %>
+    <%= form.label :address%>
+    <%= form.text_field :address%>
+
+    <%= form.select :key,  Links::MINOR_PLATFORMS, value: nil %>
+
+    <%= form.hidden_field :icon, value: Links.icon_path_for(:key) %>
+    <%= form.submit "add", class:'btn btn-dark' %>
+  <% end %>
+  </div>
+  <div class="col md-3">
+  <small> custom link</small>
+  <%= form_with(model: [@topic, @external_link] ) do |form| %>
+  <div class="form-group">
+
+    <%= form.label :address%>
+    <%= form.text_field :address%>
+    </div>
+    <div class="form-group">
+    <%= form.label :key%>
+    <%= form.text_field :key, value: "" %>
+    </div>
+    <div class="form-group">
+
+    <%= form.file_field :custom_icon %>
+    </div>
+    <%= form.hidden_field :icon, value: nil %>
+    <%= form.submit "add", class:'btn btn-dark' %>
+  <% end %>
+  </div>
+  </div>
+</div>

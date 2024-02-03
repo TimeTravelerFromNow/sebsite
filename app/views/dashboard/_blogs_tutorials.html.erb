@@ -1,6 +1,8 @@
 
 <p style="color: green"><%= notice %></p>
+
 <%= link_to "new tutorial/blog", new_tutorial_path, class: "btn btn-primary" %>
+
 <% tutorial_filter = nil %>
 <% if current_page?(dashboard_tutorials_path) %>
   <% tutorial_filter = true %>

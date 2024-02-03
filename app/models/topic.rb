@@ -6,11 +6,13 @@ class Topic < ApplicationRecord
 
   has_rich_text :explanation
 
-  has_many :tutorials
+  has_many :tutorials, dependent: :nullify
 
-  has_many :external_links
+  has_many :external_links, dependent: :destroy
 
-  validates :title, presence: true, exclusion: { in: ['tutorials', 'materials', 'blogs', 'abouts'] }
+  has_one :about, dependent: :nullify
+
+  validates :title, presence: true, exclusion: { in: ['tutorials', 'materials', 'blogs', 'abouts', 'external_links'] }
 
   def to_param
     title

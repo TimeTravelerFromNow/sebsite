@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+  include Auth
+  http_basic_authenticate_with name: Auth::USERNAME, password: Auth::PW, only: %i[new create edit update destroy]
+
   before_action :set_public_topics
   before_action :set_topic, only: %i[ show edit update destroy ]
 
@@ -18,7 +21,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
-    @external_link = @topic.external_links.build()
+    @external_link = @topic.external_links.new
   end
 
   # POST /topics or /topics.json

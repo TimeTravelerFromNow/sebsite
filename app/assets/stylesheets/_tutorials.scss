@@ -20,6 +20,14 @@
 }
 
 :root {
+
+  .tutorial-small {
+    max-width: 300px;
+  }
+
+    .tutorial-tiny {
+      max-width: 150px;
+    }
   .tutorial-description {
     color: gray;
   }

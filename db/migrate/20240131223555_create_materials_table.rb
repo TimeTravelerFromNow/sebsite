@@ -4,7 +4,6 @@ class CreateMaterialsTable < ActiveRecord::Migration[7.0]
       t.string :content_type
       t.integer :position
       t.references :tutorial, null: true, foreign_key: true
-      t.references :blog, null: true, foreign_key: true
 
       t.timestamps
     end

@@ -17,13 +17,14 @@
 // more code highlight styles: https://github.com/highlightjs/highlight.js/blob/main/src/styles/
 
 
-$primary:  #a43738;
+$primary:  #e82e3d;
 
 @import "bootstrap";
 @import "topics";
 @import "tutorials";
 @import "materials";
 @import "atom-one-dark";
+@import "external_links";
 
 
 :root {
@@ -34,12 +35,6 @@ $primary:  #a43738;
       margin-bottom: 0px;
     }
 
-  .external-links {
-    img {
-      max-width: 48px;
-      max-height: 48px;
-    }
-  }
   .publicize {
     position: relative;
             right: calc(-50% + 38px);
@@ -54,4 +49,29 @@ $primary:  #a43738;
   .select-card {
     border-radius: 10px;
   }
+
+  .about-card {
+    border-width: 0px;
+    margin-top: 10px;
+  }
+  #portrait {
+
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+
+
+    background-color: $primary;
+    img {
+      max-width: 120px;
+      padding: 10px;
+      margin-bottom: 30px;
+    }
+    .about-body {
+      padding: 10px;
+        margin: 10px;
+      background-color: white;
+    }
+  }
+
 }

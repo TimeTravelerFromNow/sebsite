@@ -1,4 +1,7 @@
 class DashboardController < ApplicationController
+  include Auth
+  http_basic_authenticate_with name: Auth::USERNAME, password: Auth::PW, only: %i[root blogs tutorials show edit update destroy]
+
   before_action :set_all_topics
   def root
 

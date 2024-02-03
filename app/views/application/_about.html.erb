@@ -1,0 +1,18 @@
+
+<% rendered_one = false %>
+
+<% if topic == nil || About.where(:topic => topic).count == 0%>
+<% About.where(:default => true).each do |about| %>
+  <% if !(rendered_one) %>
+  <%= render "about_card", about: about %>
+  <% rendered_one = true %>
+  <% end %>
+<% end %>
+<% else %>
+<% About.where(:topic => topic).each do |about| %>
+  <% if !(rendered_one) %>
+  <%= render "about_card", about: about %>
+  <% rendered_one = true %>
+  <% end %>
+<% end %>
+<% end %>

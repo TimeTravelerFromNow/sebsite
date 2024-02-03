@@ -4,15 +4,11 @@
 
 
       <% if topic.icon != "none selected" && topic.icon != ""%>
-      <%= image_tag "#{topic.icon}", class:"col", style: "max-width: 10%;" %>
+      <%= image_tag "#{topic.icon}", class:"col pt-4 ", style: "max-width: 10%; " %>
       <% end %>
 
-      <h3 class="col" style="max-width:30%"> <%= topic.title %> </h3>
+      <h3 class="col-3 pt-4" style="max-width:30%"> <%= topic.title %> </h3>
   </div>
-
-  <p>
-  <%= topic.description %>
-  </p>
 
   <% if topic.header_image.present? %>
 
@@ -28,4 +24,7 @@
     <%= link_to "view" ,topic, class:"btn btn-primary" %>
   <% end %>
 
+  <p class="justify-content-center" style="padding-left:100px">
+    <%= topic.description %>
+  </p>
 </div>

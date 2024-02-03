@@ -1,0 +1,17 @@
+
+
+<a href="<%= link.address %>" target="_blank" rel="noreferrer noopener" class="card link-card external-link">
+    <% if link.custom_icon.present? %>
+      <%= image_tag link.custom_icon %>
+    <% else %>
+      <% if link.icon %>
+        <% if link.icon == "" %>
+          <%= image_tag asset_path(Links::ERROR) %>
+        <% else %>
+          <%= image_tag asset_path(link.icon) %>
+        <% end %>
+      <% else %>
+        <%= image_tag asset_path(Links::ERROR) %>
+      <% end %>
+    <% end %>
+</a>

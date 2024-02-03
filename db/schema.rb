@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_02_204114) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_03_193915) do
+  create_table "abouts", force: :cascade do |t|
+    t.boolean "default"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "topic_id"
+    t.index ["topic_id"], name: "index_abouts_on_topic_id"
+  end
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -52,12 +60,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_204114) do
   create_table "external_links", force: :cascade do |t|
     t.string "address"
     t.string "icon"
-    t.integer "blog_id"
     t.integer "topic_id"
     t.integer "tutorial_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["blog_id"], name: "index_external_links_on_blog_id"
+    t.string "key"
     t.index ["topic_id"], name: "index_external_links_on_topic_id"
     t.index ["tutorial_id"], name: "index_external_links_on_tutorial_id"
   end
@@ -66,12 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_204114) do
     t.string "content_type"
     t.integer "position"
     t.integer "tutorial_id"
-    t.integer "blog_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "width"
     t.string "lang"
-    t.index ["blog_id"], name: "index_materials_on_blog_id"
     t.index ["tutorial_id"], name: "index_materials_on_tutorial_id"
   end
 
@@ -100,12 +105,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_204114) do
     t.index ["topic_id"], name: "index_tutorials_on_topic_id"
   end
 
+  add_foreign_key "abouts", "topics"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "external_links", "blogs"
   add_foreign_key "external_links", "topics"
   add_foreign_key "external_links", "tutorials"
-  add_foreign_key "materials", "blogs"
   add_foreign_key "materials", "tutorials"
   add_foreign_key "tutorials", "topics"
 end

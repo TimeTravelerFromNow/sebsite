@@ -58,7 +58,11 @@
 
   <div class="form-group">
     <%= form.label :status %>
-    <%= form.select :status, ['public','private','archived', 'hidden'], selected: 'public'%>
+    <% selected_status = 'pending' %>
+    <% if tutorial.persisted? %>
+      <% selected_status = tutorial.status %>
+    <% end %>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: selected_status%>
   </div>
   <div>
     <%= form.submit %>

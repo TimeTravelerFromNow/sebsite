@@ -1,0 +1,12 @@
+
+
+<div id="ext-link-row" class="container-sm">
+  <div class="row justify-content-center">
+  <% links.each do |el| %>
+    <div id="<%= dom_id el %>" class="col-1">
+
+      <%= render "link_icon", link: el %>
+    </div>
+  <% end %>
+  </div>
+</div>
